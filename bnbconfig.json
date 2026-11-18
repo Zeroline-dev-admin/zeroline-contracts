@@ -1,0 +1,29 @@
+{
+  "project": "ZEROLINE",
+  "website": "https://zeroline.gg",
+  "networks": {
+    "bsc": {
+      "name": "BNB Smart Chain Mainnet",
+      "chainId": 56,
+      "rpc": "https://bsc-dataseed.bnbchain.org",
+      "explorer": "https://bscscan.com",
+      "paymaster": "https://bsc-megafuel.nodereal.io",
+      "contracts": {
+        "CookedFactory": "0x11b123b02A212d9A2177761a099D6050d9258971",
+        "PostedOracleV2": "0x4bf0aE170AbCaB4C689143E3Ef68875f911CAFDD",
+        "ContestPricesImplementation": "0x6A21F4816F6e01D3E820874B547E17553c874Ace",
+        "ContestBookImplementation": "0x98483449BA40aed849bbF57a326b940E5F0Da32F",
+        "ContestPrizesImplementation": "0x701C6B6fDEE7c658d22c2634288657C6F8a5c3D8",
+        "CookedEntry": "0x40f9E0A675e333165691411e34CfB94620A225D7",
+        "CookedFees": "0x7409Dab98100c6039270aaCd8ca342c6fA03d164"
+      }
+    },
+    "bscTestnet": {
+      "name": "BNB Smart Chain Testnet",
+      "chainId": 97,
+      "rpc": "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
+      "explorer": "https://testnet.bscscan.com",
+      "paymaster": "https://bsc-megafuel-testnet.nodereal.io"
+    }
+  }
+}

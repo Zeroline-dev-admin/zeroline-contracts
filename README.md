@@ -1,12 +1,35 @@
 # ZEROLINE
 
-**Free trading cups on BNB Smart Chain. Every player starts with the same 10,000 points.**
+Free trading cups where every player starts with the same 10,000 points, built on BNB Smart Chain (BSC).
 
 Website: https://zeroline.gg · X: https://x.com/zeroline_gg · Telegram: https://t.me/zeroline_gg
 
 ZEROLINE runs short trading contests ("cups") on real market prices. Everyone starts with 10,000 points, so the ranking shows who traded well, not who had the most money. Points, not money: joining is free and no deposit is needed. Top players claim USDT prizes put up in advance by the cup's host.
 
-This repository holds the smart contracts behind ZEROLINE and their BNB Smart Chain mainnet addresses.
+This is the official smart contract repository of ZEROLINE, deployed on BNB Smart Chain mainnet.
+
+## Technology Stack
+
+- **Blockchain:** BNB Smart Chain (BSC)
+- **Smart Contracts:** Solidity 0.8.24
+- **Frontend:** HTML/JavaScript web app + ethers.js, Telegram Mini App
+- **Development:** Hardhat, OpenZeppelin Contracts 5.6.1
+- **Gas sponsorship:** NodeReal MegaFuel (BSC paymaster)
+
+## Supported Networks
+
+- BNB Smart Chain Mainnet (Chain ID: 56)
+- BNB Smart Chain Testnet (Chain ID: 97), used for testing
+
+Network settings are in [`hardhat.config.js`](hardhat.config.js) and [`bnbconfig.json`](bnbconfig.json).
+
+## Features
+
+- **Same start for everyone:** every player gets 10,000 points, so size isn't skill
+- **Prize locked at creation:** a cup cannot exist without its full USDT prize pool on BSC
+- **Sealed orders:** trades stay hidden as hashes until the bell, then are revealed and checked
+- **Gasless for players:** orders leave from the player's own address with gas sponsored through MegaFuel, so no BNB is needed
+- **Results anyone can check:** prices, orders and the final ranking are on BSC; winners claim from their own wallet
 
 ## How it uses BNB Smart Chain
 
@@ -28,12 +51,12 @@ This repository holds the smart contracts behind ZEROLINE and their BNB Smart Ch
 | `PostedOracle` | Earlier version of the price input (cups #1 to #5) |
 | `CookedEntry` | Entry conditions: passes and principal-protected deposits |
 | `CookedFees` | Entry-fee cups |
-| `PythOracle`, `PriceRelay` | Pyth price input (not used on BNB mainnet today) |
+| `PythOracle`, `PriceRelay` | Optional Pyth price input, not deployed on BSC |
 | `TestUSDC`, `contracts/test/*` | Testnet and test-only tokens and mocks |
 
-## BNB Smart Chain mainnet (chain id 56)
+## Contract Addresses
 
-Cups #6 and later:
+### BNB Smart Chain Mainnet (Chain ID: 56), cups #6 and later
 
 | Contract | Address |
 |---|---|
@@ -45,7 +68,7 @@ Cups #6 and later:
 | CookedEntry | [`0x40f9E0A675e333165691411e34CfB94620A225D7`](https://bscscan.com/address/0x40f9E0A675e333165691411e34CfB94620A225D7) |
 | CookedFees | [`0x7409Dab98100c6039270aaCd8ca342c6fA03d164`](https://bscscan.com/address/0x7409Dab98100c6039270aaCd8ca342c6fA03d164) |
 
-Cups #1 to #5 (earlier factory):
+### BNB Smart Chain Mainnet (Chain ID: 56), cups #1 to #5 (earlier factory)
 
 | Contract | Address |
 |---|---|
@@ -56,7 +79,7 @@ Cups #1 to #5 (earlier factory):
 | ContestPrizes (implementation) | [`0x892f7a9Fa9fC0B740A7c319c0ceEc274e24E6f78`](https://bscscan.com/address/0x892f7a9Fa9fC0B740A7c319c0ceEc274e24E6f78) |
 | CookedEntry | [`0xE51f9259fac667F6283193aDDCBEec8423CBf486`](https://bscscan.com/address/0xE51f9259fac667F6283193aDDCBEec8423CBf486) |
 
-The same list is in [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json). Each cup's own contracts are clones created by the factory; their addresses are listed on each cup's page at zeroline.gg.
+The same list is in [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json) and [`bnbconfig.json`](bnbconfig.json). Each cup's own contracts are clones created by the factory; their addresses are listed on each cup's page at zeroline.gg.
 
 ## Build
 
@@ -69,16 +92,9 @@ npx hardhat compile
 
 Compiler: Solidity 0.8.24, optimizer on (1 run), EVM version cancun. Dependencies: OpenZeppelin Contracts 5.6.1.
 
-## Tech stack
-
-- Smart contracts: Solidity, Hardhat, OpenZeppelin
-- Chain: BNB Smart Chain mainnet
-- Gas sponsorship: NodeReal MegaFuel
-- App: web app at zeroline.gg and a Telegram Mini App
-
 ## Status
 
-Live on BNB Smart Chain mainnet. These contracts have not had a third-party audit yet.
+Live on BNB Smart Chain mainnet since November 2026. Some contract comments mention HyperEVM from an earlier prototype; `ContestPrices` reads prices through an oracle interface, and on BSC that input is `PostedOracleV2`. These contracts have not had a third-party audit yet.
 
 ## License
 
